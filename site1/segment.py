@@ -1,4 +1,5 @@
 from tensorflow.keras.models import load_model
+import os
 
 MODEL_NAME = 'model_fmr_all.h5'
 import numpy as np
@@ -9,6 +10,10 @@ INPUT_SHAPE = (28, 28, 1)
 
 
 def process(image_file):
+    try:
+        print(os.environ['PORT'])
+    except:
+        print("PORT not found")
     image = Image.open(image_file).convert('L')
     resized_image = image.resize(
         (INPUT_SHAPE[1], INPUT_SHAPE[0]))
